@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import "./UserManage.scss"
-import { getAllUsers } from "../../services/UserService"
+import {getAllUsers, createNewUserService} from "../../services/UserService"
+import UserModal from "./UserModal";
 
 class UserManage extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            users: []
+            users: [],
+            isOpenModalUser: false
         }
     }
 
-
-
-    async componentDidMount() {
+    fetchUser = async () => {
         let res = await getAllUsers('ALL');
         if (res && res.errCode === 0) {
             this.setState({
@@ -23,39 +23,83 @@ class UserManage extends Component {
         }
     }
 
+    async componentDidMount() {
+        await this.fetchUser();
+    }
+
+    handleClickAddNewUser = () => {
+        this.setState({
+            isOpenModalUser: true
+        })
+    }
+
+    toggleUserModal = () => {
+        this.setState({
+            isOpenModalUser: !this.state.isOpenModalUser
+        })
+    }
+
+    createNewUser = async (data) => {
+        try {
+            let response = await createNewUserService(data);
+            if (response && response.errCode !== 0) {
+                alert(response.errMessage);
+            } else {
+                await this.fetchUser();
+                this.setState({
+                    isOpenModalUser: false
+                })
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
 
     render() {
         let { users } = this.state;
         return (
             <div className="users-container">
+                <UserModal
+                    isOpen={this.state.isOpenModalUser}
+                    toggleFromParent={this.toggleUserModal}
+                    createNewUser={this.createNewUser}
+                />
                 <div className="title text-center">Manage users</div>
-                <div className="users-table mt-3">
+                <div className="mx-1">
+                    <button
+                        onClick={this.handleClickAddNewUser}
+                        className='btn btn-primary px-3'><i className="fas fa-plus"></i>Add new user</button>
+                </div>
+                <div className="users-table mt-3 mx-1">
                     <table id="customers">
-                        <tr>
-                            <th>Email</th>
-                            <th>Firstname</th>
-                            <th>Lastname</th>
-                            <th>Address</th>
-                            <th>Action</th>
-                        </tr>
-                        {users && users.map((user) =>
-                            <tr key={user.id}>
-                                <td>{user.email}</td>
-                                <td>{user.firstname}</td>
-                                <td>{user.lastname}</td>
-                                <td>{user.address}</td>
-                                <td>
-                                    <button className='btn btn-warning me-3'>
-                                        <span className='p-3'>
-                                            Cập nhật
-                                        </span>
-                                    </button>
-                                    <button className='btn btn-danger'>
-                                        <span className='p-3'>Xóa</span>
-                                    </button>
-                                </td>
+                        <tbody>
+                            <tr>
+                                <th>Email</th>
+                                <th>Firstname</th>
+                                <th>Lastname</th>
+                                <th>Address</th>
+                                <th>Action</th>
                             </tr>
-                        )}
+                            {users && users.map((user) =>
+                                <tr key={user.id}>
+                                    <td>{user.email}</td>
+                                    <td>{user.firstname}</td>
+                                    <td>{user.lastname}</td>
+                                    <td>{user.address}</td>
+                                    <td>
+                                        <button className='btn btn-warning me-3'>
+                                            <span className='p-3'>
+                                                Cập nhật
+                                            </span>
+                                        </button>
+                                        <button className='btn btn-danger'>
+                                            <span className='p-3'>Xóa</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            )}
+                        </tbody>
                     </table>
                 </div>
             </div>

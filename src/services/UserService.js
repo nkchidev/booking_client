@@ -8,4 +8,8 @@ function getAllUsers(id){
     return axios.get(`/api/get-all-users?id=${id}`);
 }
 
-export {handleLoginApi,getAllUsers}
+function createNewUserService(data){
+    return axios.post('/api/create-user', data);
+}
+
+export {handleLoginApi,getAllUsers,createNewUserService}

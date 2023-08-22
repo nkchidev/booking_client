@@ -12,4 +12,8 @@ function createNewUserService(data){
     return axios.post('/api/create-user', data);
 }
 
-export {handleLoginApi,getAllUsers,createNewUserService}
+function deleteUserService(id){
+    return axios.delete('/api/delete-user', {data: {id : id}});
+}
+
+export {handleLoginApi,getAllUsers,createNewUserService,deleteUserService}

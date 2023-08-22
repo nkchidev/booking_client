@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import "./UserManage.scss"
-import {getAllUsers, createNewUserService} from "../../services/UserService"
+import {getAllUsers, createNewUserService,deleteUserService} from "../../services/UserService"
 import UserModal from "./UserModal";
+import { emitter } from '../../utils/emitter';
 
 class UserManage extends Component {
 
@@ -49,9 +50,25 @@ class UserManage extends Component {
                 this.setState({
                     isOpenModalUser: false
                 })
+                emitter.emit('EVENT_CLEAR_MODAL_DATA')
             }
         } catch (error) {
             console.log(error);
+        }
+    }
+
+    handleClickDelete = async (user) => {
+        if(window.confirm(`Bạn có chắc chắn muốn xóa người dùng tên ${user?.lastname} này không?  `)){
+            try {
+                let response = await deleteUserService(user?.id);
+                if(response && response.errCode === 0){
+                    await this.fetchUser();
+                }else{
+                    console.log(response.errMessage);
+                }
+            } catch (error) {
+                console.log(error);
+            }
         }
     }
 
@@ -93,7 +110,9 @@ class UserManage extends Component {
                                                 Cập nhật
                                             </span>
                                         </button>
-                                        <button className='btn btn-danger'>
+                                        <button className='btn btn-danger'
+                                            onClick={() => this.handleClickDelete(user)}
+                                        >
                                             <span className='p-3'>Xóa</span>
                                         </button>
                                     </td>

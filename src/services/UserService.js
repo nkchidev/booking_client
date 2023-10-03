@@ -16,4 +16,8 @@ function deleteUserService(id){
     return axios.delete('/api/delete-user', {data: {id : id}});
 }
 
-export {handleLoginApi,getAllUsers,createNewUserService,deleteUserService}
+function updateUserService(user){
+    return axios.put('/api/edit-user', user);
+}
+
+export {handleLoginApi,getAllUsers,createNewUserService,deleteUserService, updateUserService}

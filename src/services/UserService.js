@@ -20,4 +20,14 @@ function updateUserService(user){
     return axios.put('/api/edit-user', user);
 }
 
-export {handleLoginApi,getAllUsers,createNewUserService,deleteUserService, updateUserService}
+function getAllCodeService(type){
+    return axios.get(`/api/allcode?type=${type}`);
+}
+
+export {
+    handleLoginApi,
+    getAllUsers,createNewUserService,
+    deleteUserService, 
+    updateUserService,
+    getAllCodeService
+}

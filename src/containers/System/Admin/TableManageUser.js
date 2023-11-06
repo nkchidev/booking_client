@@ -25,6 +25,10 @@ class TableManageUser extends Component {
             });
         }
     }
+    
+    handleEditUser = (user) => {
+        this.props.handleEditUserFromParentKey(user);
+    }
 
     handleDeleteUser = (user) => {
         this.props.deleteUserRedux(user.id);
@@ -51,7 +55,11 @@ class TableManageUser extends Component {
                                 <td>{item.lastname}</td>
                                 <td>{item.address}</td>
                                 <td>
-                                    <button className='btn-warning'><i className='fas fa-pencil-alt'></i></button>
+                                    <button className='btn-warning'
+                                        onClick={() => this.handleEditUser(item)}    
+                                    >
+                                        <i className='fas fa-pencil-alt'></i>
+                                    </button>
                                     <button
                                         onClick={() => this.handleDeleteUser(item)}
                                         className='btn-danger ml-1'
@@ -79,7 +87,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchUserRedux: () => dispatch(actions.fetchAllUsersStart()),
-        deleteUserRedux: (id) => dispatch(actions.deleteUser(id))
+        deleteUserRedux: (id) => dispatch(actions.deleteUser(id)),
     };
 };
 

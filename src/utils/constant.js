@@ -11,11 +11,12 @@ export const LANGUAGES = {
     EN: 'en'
 };
  
-export const manageActions = {
-    ADD: "ADD",
-    EDIT: "EDIT",
-    DELETE: "DELETE"
-};
+export const CRUD_ACTIONS = {
+    CREATE: 'CREATE',
+    EDIT: 'EDIT',
+    DELETE: 'DELETE',
+    READ: 'READ'
+}
 
 export const dateFormat = {
     SEND_TO_SERVER: 'DD/MM/YYYY'

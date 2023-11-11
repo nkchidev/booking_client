@@ -7,7 +7,7 @@ class About extends Component {
         return (
             <div className="section-about">
                 <div className="section-about-header">
-                    Truyển thông nói về Nguyễn Kim Chí
+                    Truyển thông nói về Lê Trung Huy
                 </div>
                 <div className="section-about-content">
                     <div className="content-left">

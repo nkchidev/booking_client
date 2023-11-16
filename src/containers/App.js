@@ -10,8 +10,6 @@ import Home from '../routes/Home';
 import Login from './Authentication/Login';
 import System from '../routes/System';
 import HomePage from "./HomePage/HomePage"
-
-import { CustomToastCloseButton } from '../components/CustomToast';
 import CustomScrollbars from '../components/CustomScrollbars';
 
 class App extends Component {

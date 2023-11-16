@@ -6,47 +6,48 @@ import Slider from "react-slick";
 import "./Specialty.scss"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { LANGUAGES } from '../../utils';
+import { FormattedMessage } from 'react-intl';
 
 class Specialty extends Component {
 
+    componentDidMount(){
+        console.log(this.props.arrDoctors);
+    }
+
     render() {
+        let arrDoctors = this.props.arrDoctors;
+        let language = this.props;
         return (
             <div className="section-specialty">
                 <div className="specialty-container">
                     <div className="specialty-header">
-                        <span className="title-section">{ this.props.title }</span>
-                        <button className="btn-section">Xem thêm</button>
+                        <span className="title-section">
+                            {this.props.moreInfo && <FormattedMessage id={this.props.title} /> }
+                        </span>
+                        <button className="btn-section">
+                            {this.props.moreInfo && <FormattedMessage id={this.props.moreInfo} />}
+                        </button>
                     </div>
                     <div className="specialty-body">
                         <Slider {...this.props.settings}>
-                            <div className='specialty-customize'>
-                                <div className="bg-image"></div>
-                                <div className="">Cơ xương khớp 1</div>
-                            </div>
-                            <div className='specialty-customize'>
-                                <div className="bg-image"></div>
-                                <div className="">Cơ xương khớp 2</div>
-                            </div>
-                            <div className='specialty-customize'>
-                                <div className="bg-image"></div>
-                                <div className="">Cơ xương khớp 3</div>
-                            </div>
-                            <div className='specialty-customize'>
-                                <div className="bg-image"></div>
-                                <div className="">Cơ xương khớp 4</div>
-                            </div>
-                            <div className='specialty-customize'>
-                                <div className="bg-image"></div>
-                                <div className="">Cơ xương khớp 5</div>
-                            </div>
-                            <div className='specialty-customize'>
-                                <div className="bg-image"></div>
-                                <div className="">Cơ xương khớp 6</div>
-                            </div>
-                            <div className='specialty-customize'>
-                                <div className="bg-image"></div>
-                                <div className="">Cơ xương khớp 7</div>
-                            </div>
+                            {arrDoctors && arrDoctors.length > 0 && 
+                                arrDoctors.map((item, index) => {
+                                    let imageBase64 = "";
+                                    if(item.image){
+                                        imageBase64 = new Buffer(item.image, 'base64').toString('binary');
+                                    }
+                                    let nameVi =  `${item.positionData.valueVi}, ${item.lastname} ${item.firstname}`;
+                                    let nameEn =  `${item.positionData.valueEn}, ${item.firstname} ${item.lastname}`;
+                                    return (
+                                        <div className='specialty-customize' key={index}>
+                                            <div className="bg-image" style={{ backgroundImage: `url(${imageBase64})` }}></div>
+                                            <div className="">
+                                                <div>{language === LANGUAGES.VI ? nameVi : nameEn}</div>
+                                            </div>
+                                        </div>
+                                    )
+                                })}
                         </Slider>
                     </div>
                 </div>
@@ -59,7 +60,7 @@ class Specialty extends Component {
 const mapStateToProps = state => {
     return {
         isLoggedIn: state.user.isLoggedIn,
-
+        language: state.app.language,
     };
 };
 

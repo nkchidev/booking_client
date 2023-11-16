@@ -47,6 +47,10 @@
                     background-color: #eee;
                 }
             }
+
+            .slick-disabled{
+                display: none !important;
+            }
         }
         
         // reset slick slider css       

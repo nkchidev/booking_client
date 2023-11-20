@@ -28,11 +28,21 @@ function getTopDoctorHomeService(limit) {
     return axios.get(`/api/top-doctor-home?limit=${limit}`);
 }
 
+function getAllDoctors() {
+    return axios.get(`/api/top-doctor-home`);
+}
+
+function saveDetailDoctorService(data) {
+    return axios.post(`/api/save-info-doctors`, data);
+}
+
 export {
     handleLoginApi,
     getAllUsers,createNewUserService,
     deleteUserService, 
     updateUserService,
     getAllCodeService,
-    getTopDoctorHomeService
+    getTopDoctorHomeService,
+    getAllDoctors,
+    saveDetailDoctorService
 }

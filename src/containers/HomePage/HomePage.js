@@ -37,14 +37,18 @@ class HomePage extends Component {
             slidesToScroll: 1
         };
         let arrDoctors = this.state.arrDoctors;
-        console.log(arrDoctors);
         return (
             <div>
-                <Header />
-                <Specialty settings={settings} title="Chuyên khoa phổ biến" />
-                <Specialty settings={settings} title="Cơ sở y tế nổi bật" />
-                <Specialty settings={settings} title={"homepage.outstanding-doctor"} moreInfo={"homepage.more-info"} arrDoctors={arrDoctors} />
-                <Specialty settings={settings} title="Cẩm nang"/>
+                <Header isShowBanner={true} />
+                {/* <Specialty settings={settings} title="Chuyên khoa phổ biến" /> */}
+                {/* <Specialty settings={settings} title="Cơ sở y tế nổi bật" /> */}
+                <Specialty 
+                    settings={settings} 
+                    title={"homepage.outstanding-doctor"} 
+                    moreInfo={"homepage.more-info"} 
+                    arrDoctors={arrDoctors} 
+                />
+                {/* <Specialty settings={settings} title="Cẩm nang"/> */}
                 <About />
                 <Footer />
             </div>

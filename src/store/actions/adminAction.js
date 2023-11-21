@@ -5,7 +5,7 @@ import { createNewUserService,
     deleteUserService,
     updateUserService, 
     getTopDoctorHomeService, 
-    getAllDoctors, 
+    getAllDoctorsService, 
     saveDetailDoctorService
 } from "../../services/UserService";
 import { toast } from 'react-toastify';
@@ -225,7 +225,7 @@ export const fetchTopDoctors = () => {
 export const fetchAllDoctors = () => {
     return async (dispatch, getState) => {
         try {
-            let res = await getAllDoctors();
+            let res = await getAllDoctorsService();
             if(res && res.errCode === 0){
                 dispatch({
                     type: actionTypes.FETCH_ALL_DOCTOR_SUCCESS,

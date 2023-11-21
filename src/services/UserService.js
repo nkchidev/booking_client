@@ -28,12 +28,16 @@ function getTopDoctorHomeService(limit) {
     return axios.get(`/api/top-doctor-home?limit=${limit}`);
 }
 
-function getAllDoctors() {
+function getAllDoctorsService() {
     return axios.get(`/api/top-doctor-home`);
 }
 
 function saveDetailDoctorService(data) {
     return axios.post(`/api/save-info-doctors`, data);
+}
+
+function getDetailInfoDoctorService(id){
+    return axios.get(`/api/get-detail-doctor-by-id?id=${id}`);
 }
 
 export {
@@ -43,6 +47,7 @@ export {
     updateUserService,
     getAllCodeService,
     getTopDoctorHomeService,
-    getAllDoctors,
-    saveDetailDoctorService
+    getAllDoctorsService,
+    saveDetailDoctorService,
+    getDetailInfoDoctorService
 }

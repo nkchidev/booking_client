@@ -8,11 +8,17 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { LANGUAGES } from '../../utils';
 import { FormattedMessage } from 'react-intl';
+import { withRouter } from 'react-router';
 
 class Specialty extends Component {
 
     componentDidMount(){
-        console.log(this.props.arrDoctors);
+    }
+
+    handleViewDetail(data){
+        if(this.props.history) {
+            this.props.history.push(`/detail-doctor/${data.id}`);
+        }
     }
 
     render() {
@@ -40,7 +46,7 @@ class Specialty extends Component {
                                     let nameVi =  `${item.positionData.valueVi}, ${item.lastname} ${item.firstname}`;
                                     let nameEn =  `${item.positionData.valueEn}, ${item.firstname} ${item.lastname}`;
                                     return (
-                                        <div className='specialty-customize' key={index}>
+                                        <div className='specialty-customize' key={index} onClick={() => this.handleViewDetail(item)}>
                                             <div className="bg-image" style={{ backgroundImage: `url(${imageBase64})` }}></div>
                                             <div className="">
                                                 <div>{language === LANGUAGES.VI ? nameVi : nameEn}</div>
@@ -69,4 +75,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Specialty);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Specialty));

@@ -4,6 +4,7 @@ import "./HomeHeader.scss"
 import { FormattedMessage } from 'react-intl';
 import logo from '../../assets/logo.svg';
 import { LANGUAGES } from "../../utils";
+import { withRouter } from 'react-router';
 import { changeLanguageApp } from '../../store/actions/appActions';
 
 class HomeHeader extends Component {
@@ -12,14 +13,21 @@ class HomeHeader extends Component {
         this.props.changeLanguageAppRedux(language);
     }
 
+    returnToHome = () => {
+        if (this.props.history) {
+            this.props.history.push('/home')
+        }
+    }
+
     render() {
+        let language = this.props.language;
         return (
-            <>
+            <React.Fragment>
                 <div className='home-header-container'>
                     <div className="home-header-content">
                         <div className="left-content">
                             <i className="fas fa-bars"></i>
-                            <img src={logo} className='header-logo' alt="" />
+                            <img src={logo} className="header-logo"  onClick={() => this.returnToHome()}/>
                         </div>
                         <div className="center-content">
                             <div className="child-content">
@@ -89,7 +97,7 @@ class HomeHeader extends Component {
                     </div>
                 }
 
-            </>
+            </React.Fragment>
         );
     }
 
@@ -108,4 +116,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeHeader);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomeHeader));

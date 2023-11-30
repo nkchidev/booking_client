@@ -39,6 +39,10 @@ function saveDetailDoctorService(data) {
 function getDetailInfoDoctorService(id){
     return axios.get(`/api/get-detail-doctor-by-id?id=${id}`);
 }
+function saveBulkScheduleDoctor(data){
+    return axios.post('/api/bulk-create-schedule', data);
+}
+
 
 export {
     handleLoginApi,
@@ -49,5 +53,6 @@ export {
     getTopDoctorHomeService,
     getAllDoctorsService,
     saveDetailDoctorService,
-    getDetailInfoDoctorService
+    getDetailInfoDoctorService,
+    saveBulkScheduleDoctor
 }

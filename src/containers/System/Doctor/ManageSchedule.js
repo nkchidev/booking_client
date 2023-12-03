@@ -107,10 +107,9 @@ class ManageSchedule extends Component {
             return;
         }
 
-       //let formatedDate = moment(currentDate).format(dateFormat.SEND_TO_SERVER);
-
-     //let formatedDate = moment(currentDate).unix();
-     let formatedDate = new Date(currentDate).getTime();
+        //let formatedDate = moment(currentDate).format(dateFormat.SEND_TO_SERVER);
+        //let formatedDate = moment(currentDate).unix();
+        let formatedDate = new Date(currentDate).getTime();
 
         if(rangeTime && rangeTime.length > 0){
             let selectedTime = rangeTime.filter(item => item.isSelected === true);
@@ -129,13 +128,10 @@ class ManageSchedule extends Component {
         }
 
         let res = await saveBulkScheduleDoctor({
-            arrSchedule:result,
+            arrSchedule: result,
             doctorId: selectedDoctor.value,
             formatedDate: formatedDate
         })
-        console.log('hospital check res:saveBulkScheduleDoctor', res)
-
-        console.log('result' , result);
     }
 
 

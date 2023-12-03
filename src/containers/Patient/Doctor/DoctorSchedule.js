@@ -5,6 +5,8 @@ import moment from 'moment';
 import { LANGUAGES } from '../../../utils';
 import { getScheduleDoctorByDate } from '../../../services/UserService';
 import { FormattedMessage } from 'react-intl';
+import BookingModal from './Modal/BookingModal';
+import { times } from 'lodash';
 
 
 class DoctorSchedule extends Component {
@@ -13,7 +15,9 @@ class DoctorSchedule extends Component {
         super(props);
         this.state = {
             allDays: [],
-            allAvalableTime:[]
+            allAvalableTime:[],
+            isOpenModalBooking: false,
+            dataScheduleTimeModal:{}
         }
     }
 
@@ -85,10 +89,25 @@ class DoctorSchedule extends Component {
         }
     }
 
+    handleClickScheduleTime = (time) => {
+      this.setState({
+        isOpenModalBooking: true,
+        dataScheduleTimeModal: time
+      })
+      console.log('hospital :time', time)
+    }
+
+    closeBookingClose =() =>{
+      this.setState({
+        isOpenModalBooking: false
+      })
+    }
+
     render() {
-        let { allDays, allAvalableTime } = this.state;
+        let { allDays, allAvalableTime , isOpenModalBooking,dataScheduleTimeModal} = this.state;
         let { language } = this.props;
-        return (
+        return ( 
+          <>  
           <div className="doctor-schedule-container">
             <div className="all-schedule">
               <select onChange={(event) => this.handleOnChangeSelect(event)}>
@@ -120,7 +139,12 @@ class DoctorSchedule extends Component {
                             { allAvalableTime.map((item, index) => {
                               let timeDisplay = language === LANGUAGES.VI ? item.timeTypeData.valueVi : item.timeTypeData.valueEn;
                               return (
-                                  <button key={index}>{timeDisplay}</button>
+                                  <button key={index}
+                                  onClick={()=> this.handleClickScheduleTime(item)}
+                                  
+                                  >
+                                    
+                                    {timeDisplay}</button>
                                 )
                             })}
                         </div>
@@ -140,9 +164,16 @@ class DoctorSchedule extends Component {
               </div>
             </div>
           </div>
+        <BookingModal
+          isOpenModal = {isOpenModalBooking}
+          closeBookingClose ={this.closeBookingClose}
+          dataTime={dataScheduleTimeModal}
+        />
+        </>
         );
       }
-}
+    }
+
                                                         
 
 const mapStateToProps = state => {

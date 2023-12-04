@@ -27,17 +27,18 @@ class BookingModal extends Component {
     }
 
     render() {
-        let {isOpenModal, closeBookingClose, dataTime} = this.props;
-        let DoctorId = '';
+        let { isOpenModal, closeBookingClose, dataTime } = this.props;
+        let doctorId = '';
         if (dataTime && !_.isEmpty(dataTime)) {
-            DoctorId = dataTime.DoctorId
+            doctorId = dataTime.doctorId
         }
 
         return (
-            <Modal isOpen={isOpenModal} className={'booing-modal-container'}
-            size='lg'
-            centered
-            //backdrop = {true}
+            <Modal isOpen={isOpenModal} 
+                className={'booing-modal-container'}
+                size='lg'
+                centered
+                //backdrop = {true}
             >
                 <div className="booking-modal-content">
                     <div className="booking-modal-header">
@@ -50,9 +51,7 @@ class BookingModal extends Component {
 
                     <div className="booking-modal-body">
                        <div className="doctor-infor"> 
-                            <ProfileDoctor
-                           DoctorId={DoctorId}
-                            />
+                            <ProfileDoctor  doctorId={doctorId} />
                        </div>
                        <div className="row">
                         <div className="col-6 form-group">
@@ -105,9 +104,7 @@ class BookingModal extends Component {
                         <button className="btn-booking-cancel"
                             onClick={closeBookingClose}
                         >Hủy</button>
-            
                     </div>
-
                 </div>
             </Modal>
         );

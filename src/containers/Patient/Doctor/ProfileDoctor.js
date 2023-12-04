@@ -18,12 +18,12 @@ class ProfileDoctor extends Component {
 
     async componentDidMount() {
         let data = await this.getInforDoctor(this.props.doctorId);
-        this.setState ({
+        this.setState({
             dataProfile: data
         })
     }
 
-    getInforDoctor = async (id) =>  {
+    getInforDoctor = async (id) => {
         let result = {};
         if (id) {
             let res = await getProfileDoctorById(id);
@@ -34,70 +34,69 @@ class ProfileDoctor extends Component {
         return result;
     }
 
-    async componentDidUpdate(prevProps, prevState, snapshot){
-        if(this.props.language !== prevProps.language){
+    async componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.language !== prevProps.language) {
 
         }
-        if(this.props.doctorId === prevProps.doctorId){
+        if (this.props.doctorId === prevProps.doctorId) {
         }
     }
 
     render() {
         let { dataProfile } = this.state;
         let { language } = this.props;
-        let nameVi =  '',  nameEn = '';
+        let nameVi = '', nameEn = '';
         if (dataProfile && dataProfile.positionData) {
-            nameVi =`${dataProfile.positionData.valueVi}, ${dataProfile.lastName}, ${dataProfile.lastName}`;
-            nameEn =`${dataProfile.positionData.valueEn}, ${dataProfile.firstName}, ${dataProfile.firstName}`;
+            nameVi = `${dataProfile.positionData.valueVi}, ${dataProfile.lastname}, ${dataProfile.lastname}`;
+            nameEn = `${dataProfile.positionData.valueEn}, ${dataProfile.firstname}, ${dataProfile.firstname}`;
         }
 
         return (
-            <div className = "profile-doctor-container">
-            <div className="intro-doctor">
-                <div 
-                    className="content-left" 
-                    style={{ backgroundImage: `url(${dataProfile && dataProfile.image ? dataProfile.image : ''})` }}>
-                </div>
-
-                <div className="content-right">
-                    <div className="up">
-                        {language === LANGUAGES.VI ? nameVi : nameEn}
+            <div className="profile-doctor-container">
+                <div className="info-doctor">
+                    <div
+                        className="content-left"
+                        style={{ backgroundImage: `url(${dataProfile && dataProfile.image ? dataProfile.image : ''})` }}>
                     </div>
-                    <div className="down">
-                        {dataProfile && dataProfile.Markdown 
-                                      && dataProfile.Markdown.description 
-                                      &&
-                                      <span>
-                                        { dataProfile.Markdown.description }
-                                     </span>
+
+                    <div className="content-right">
+                        <div className="up">
+                            {language === LANGUAGES.VI ? nameVi : nameEn}
+                        </div>
+                        <div className="down">
+                            {dataProfile && dataProfile.Markdown
+                                && dataProfile.Markdown.description
+                                &&
+                                <span>
+                                    {dataProfile.Markdown.description}
+                                </span>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div className="price">
+                        Giá khám:
+                        {dataProfile && dataProfile.Doctor_Infor && language === LANGUAGES.VI &&
+                            <NumberFormat
+                                className='currency'
+                                value={dataProfile.Doctor_Infor.priceTypeData.valueVi}
+                                displayType={'text'}
+                                thousandSeparator={true}
+                                suffix={'VND'}
+                            />
+                        }
+                        
+                        {dataProfile && dataProfile.Doctor_Infor && language === LANGUAGES.EN &&
+                            <NumberFormat
+                                className='currency'
+                                value={dataProfile.Doctor_Infor.priceTypeData.valueEN}
+                                displayType={'text'}
+                                thousandSeparator={true}
+                                suffix={'$'}
+                            />
                         }
                     </div>
             </div>
-            <div className="price">
-                Giá khám:
-                {dataProfile && dataProfile.Doctor_Infor && language === LANGUAGES.VI &&
-                        <NumberFormat
-                            className='currency'
-                            value={dataProfile.Doctor_Infor.priceTypeData.valueVi}
-                            displayType={'text'}
-                            thousandSeparator = {true}
-                            suffix={'VND'}
-                        />
-                }
-
-                {dataProfile && dataProfile.Doctor_Infor && language === LANGUAGES.EN &&
-                        <NumberFormat
-                            className='currency'
-                            value={dataProfile.Doctor_Infor.priceTypeData.valueEN}
-                            displayType={'text'}
-                            thousandSeparator = {true}
-                            suffix={'$'}
-                        />
-                }
-
-            </div>
-        </div>
-        </div>
         );
     };
 }

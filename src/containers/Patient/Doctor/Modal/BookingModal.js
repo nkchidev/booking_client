@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import './BookingModal.scss';
-import { Modal} from 'reactstrap';
+import { Modal} from 'reactstrap'; 
+import ProfileDoctor from '../ProfileDoctor';
+import _ from 'lodash';
 
 
 class BookingModal extends Component {
@@ -25,8 +27,12 @@ class BookingModal extends Component {
     }
 
     render() {
-        //toggle={ } 
         let {isOpenModal, closeBookingClose, dataTime} = this.props;
+        let DoctorId = '';
+        if (dataTime && !_.isEmpty(dataTime)) {
+            DoctorId = dataTime.DoctorId
+        }
+
         return (
             <Modal isOpen={isOpenModal} className={'booing-modal-container'}
             size='lg'
@@ -35,22 +41,18 @@ class BookingModal extends Component {
             >
                 <div className="booking-modal-content">
                     <div className="booking-modal-header">
-                        <span className="left">Thong tin dat lich kham</span>
+                        <span className="left">Thông tin đặt lịch khám</span>
                         <span 
                         className="right"
-                        onClick={closeBookingClose}
-                        
-                        ><i class="fa fa-times" aria-hidden="true"></i></span>
-
+                        onClick={closeBookingClose}                        
+                        ><i className="fa fa-times"></i></span>
                     </div>
 
                     <div className="booking-modal-body">
-                       {/*{JSON.stringify(dataTime)}*/}
                        <div className="doctor-infor"> 
-                       
-                       </div>
-                       <div className="price">
-                            Giá khám 350.000vnd
+                            <ProfileDoctor
+                           DoctorId={DoctorId}
+                            />
                        </div>
                        <div className="row">
                         <div className="col-6 form-group">

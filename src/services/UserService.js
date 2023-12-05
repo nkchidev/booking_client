@@ -58,6 +58,10 @@ function postPatientBookAppoiment(data){
     return axios.post(`/api/patient-book-appointment`, data);
 }
 
+function createNewSpecialty(data){
+    return axios.post(`/api/create-new-specialty`, data);
+}
+
 
 export {
     handleLoginApi,
@@ -73,5 +77,6 @@ export {
     getScheduleDoctorByDate,
     getExtraInforDoctorById,
     getProfileDoctorById,
-    postPatientBookAppoiment
+    postPatientBookAppoiment,
+    createNewSpecialty
 }

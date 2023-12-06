@@ -70,6 +70,23 @@ function postVerifyBookAppoiment(data){
     return axios.post(`/api/verify-book-appointment`, data);
 }
 
+function getAllDetailSpecialtyById(data){
+    return axios.get(`/api/get-detail-specialty-by-id?id=${data.id}&location=${data.location}`);
+}
+
+function createNewClinic(data){
+    return axios.post(`/api/create-new-clinic`, data);
+}
+
+function getAllClinic(){
+    return axios.get(`/api/get-clinic`);
+}
+
+function getAllDetailClinicById(id){
+    return axios.get(`/api/get-detail-clinic-by-id?id=${id}`);
+}
+
+
 export {
     handleLoginApi,
     getAllUsers,createNewUserService,
@@ -87,5 +104,9 @@ export {
     postPatientBookAppoiment,
     createNewSpecialty,
     getAllSpecialty,
-    postVerifyBookAppoiment
+    postVerifyBookAppoiment,
+    getAllDetailSpecialtyById,
+    createNewClinic,
+    getAllClinic,
+    getAllDetailClinicById
 }

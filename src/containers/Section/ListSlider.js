@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 
 import Slider from "react-slick";
 
-import "./Specialty.scss"
+import "./ListSlider.scss"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { LANGUAGES } from '../../utils';
 import { FormattedMessage } from 'react-intl';
 import { withRouter } from 'react-router';
 
-class Specialty extends Component {
+class ListSlider extends Component {
 
     componentDidMount(){
     }
@@ -23,14 +23,20 @@ class Specialty extends Component {
 
     handleViewDetailSpecialty(data){
         if(this.props.history) {
-            this.props.history.push(`/detail-doctor/${data.id}`);
+            this.props.history.push(`/detail-specialty/${data.id}`);
         }
     }
 
+    handleViewDetailClinic(data){
+        if(this.props.history) {
+            this.props.history.push(`/detail-clinic/${data.id}`);
+        }
+    }
 
     render() {
         let arrDoctors = this.props.arrDoctors;
         let arrSpecialties = this.props.arrSpecialties;
+        let arrClinics = this.props.arrClinics;
         let language = this.props;
         return (
             <div className="section-specialty">
@@ -61,7 +67,7 @@ class Specialty extends Component {
                                             </div>
                                         </div>
                                     )
-                                })}
+                            })}
 
                             {arrSpecialties && arrSpecialties.length > 0 && 
                                 arrSpecialties.map((item, index) => {
@@ -73,7 +79,19 @@ class Specialty extends Component {
                                             </div>
                                         </div>
                                     )
-                                })}
+                            })}
+
+                            {arrClinics && arrClinics.length > 0 && 
+                                arrClinics.map((item, index) => {
+                                    return (
+                                        <div className='specialty-customize' key={index} onClick={() => this.handleViewDetailClinic(item)}>
+                                            <div className="bg-image" style={{ backgroundImage: `url(${item.image})` }}></div>
+                                            <div className="specialty-name">
+                                                <div>{item.name}</div>
+                                            </div>
+                                        </div>
+                                    )
+                            })}
                         </Slider>
                     </div>
                 </div>
@@ -95,4 +113,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Specialty));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ListSlider));

@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from "./HomeHeader"
 import Footer from "./HomeFooter"
-import Specialty from '../Section/Specialty';
+import ListSlider from '../Section/ListSlider';
 import About from '../Section/About';
 import "./HomePage.scss"
 import * as actions from "../../store/actions";
-import { getAllSpecialty } from '../../services/UserService';
+import { getAllClinic, getAllSpecialty } from '../../services/UserService';
 
 class HomePage extends Component {
 
@@ -14,7 +14,8 @@ class HomePage extends Component {
         super(props)
         this.state = {
             arrDoctors: [],
-            arrSpecialties: []
+            arrSpecialties: [],
+            arrClinics: [],
         }
     }
 
@@ -34,6 +35,13 @@ class HomePage extends Component {
                 arrSpecialties: res.data ? res.data : []
             });
         }
+
+        let resClinic = await getAllClinic();
+        if(resClinic && resClinic.errCode === 0){
+            this.setState({
+                arrClinics: resClinic.data ? resClinic.data : []
+            });
+        }
     }
 
     render() {
@@ -45,25 +53,29 @@ class HomePage extends Component {
             slidesToScroll: 1
         };
 
-        let  { arrDoctors, arrSpecialties } = this.state;
+        let  { arrDoctors, arrSpecialties, arrClinics } = this.state;
 
         return (
             <div>
                 <Header isShowBanner={true} />
-                <Specialty 
+                <ListSlider 
                     settings={settings} 
                     title={"homepage.specialty-popular"}
                     moreInfo={"homepage.more-info"} 
                     arrSpecialties={arrSpecialties} 
                 />
-                {/* <Specialty settings={settings} title="Cơ sở y tế nổi bật" /> */}
-                <Specialty 
+                <ListSlider settings={settings} 
+                    title={"homepage.outstanding-medical-facility"} 
+                    moreInfo={"homepage.more-info"} 
+                    arrClinics={arrClinics}
+                />
+                <ListSlider 
                     settings={settings} 
                     title={"homepage.outstanding-doctor"} 
                     moreInfo={"homepage.more-info"} 
                     arrDoctors={arrDoctors} 
                 />
-                {/* <Specialty settings={settings} title="Cẩm nang"/> */}
+                {/* <ListSlider settings={settings} title="Cẩm nang"/> */}
                 <About />
                 <Footer />
             </div>

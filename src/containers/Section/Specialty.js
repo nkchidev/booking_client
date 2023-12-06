@@ -15,14 +15,22 @@ class Specialty extends Component {
     componentDidMount(){
     }
 
-    handleViewDetail(data){
+    handleViewDetailDoctor(data){
         if(this.props.history) {
             this.props.history.push(`/detail-doctor/${data.id}`);
         }
     }
 
+    handleViewDetailSpecialty(data){
+        if(this.props.history) {
+            this.props.history.push(`/detail-doctor/${data.id}`);
+        }
+    }
+
+
     render() {
         let arrDoctors = this.props.arrDoctors;
+        let arrSpecialties = this.props.arrSpecialties;
         let language = this.props;
         return (
             <div className="section-specialty">
@@ -46,10 +54,22 @@ class Specialty extends Component {
                                     let nameVi =  `${item.positionData.valueVi}, ${item.lastname} ${item.firstname}`;
                                     let nameEn =  `${item.positionData.valueEn}, ${item.firstname} ${item.lastname}`;
                                     return (
-                                        <div className='specialty-customize' key={index} onClick={() => this.handleViewDetail(item)}>
+                                        <div className='specialty-customize' key={index} onClick={() => this.handleViewDetailDoctor(item)}>
                                             <div className="bg-image" style={{ backgroundImage: `url(${imageBase64})` }}></div>
-                                            <div className="">
+                                            <div className="specialty-name">
                                                 <div>{language === LANGUAGES.VI ? nameVi : nameEn}</div>
+                                            </div>
+                                        </div>
+                                    )
+                                })}
+
+                            {arrSpecialties && arrSpecialties.length > 0 && 
+                                arrSpecialties.map((item, index) => {
+                                    return (
+                                        <div className='specialty-customize' key={index} onClick={() => this.handleViewDetailSpecialty(item)}>
+                                            <div className="bg-image" style={{ backgroundImage: `url(${item.image})` }}></div>
+                                            <div className="specialty-name">
+                                                <div>{item.name}</div>
                                             </div>
                                         </div>
                                     )

@@ -6,13 +6,15 @@ import Specialty from '../Section/Specialty';
 import About from '../Section/About';
 import "./HomePage.scss"
 import * as actions from "../../store/actions";
+import { getAllSpecialty } from '../../services/UserService';
 
 class HomePage extends Component {
 
     constructor(props){
         super(props)
         this.state = {
-            arrDoctors: []
+            arrDoctors: [],
+            arrSpecialties: []
         }
     }
 
@@ -24,8 +26,14 @@ class HomePage extends Component {
         }
     }
 
-    componentDidMount(){
+    async componentDidMount(){
         this.props.loadTopDoctors();
+        let res = await getAllSpecialty();
+        if(res && res.errCode === 0){
+            this.setState({
+                arrSpecialties: res.data ? res.data : []
+            });
+        }
     }
 
     render() {
@@ -36,11 +44,18 @@ class HomePage extends Component {
             slidesToShow: 4,
             slidesToScroll: 1
         };
-        let arrDoctors = this.state.arrDoctors;
+
+        let  { arrDoctors, arrSpecialties } = this.state;
+
         return (
             <div>
                 <Header isShowBanner={true} />
-                {/* <Specialty settings={settings} title="Chuyên khoa phổ biến" /> */}
+                <Specialty 
+                    settings={settings} 
+                    title={"homepage.specialty-popular"}
+                    moreInfo={"homepage.more-info"} 
+                    arrSpecialties={arrSpecialties} 
+                />
                 {/* <Specialty settings={settings} title="Cơ sở y tế nổi bật" /> */}
                 <Specialty 
                     settings={settings} 

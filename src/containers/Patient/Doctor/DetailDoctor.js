@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import HomeHeader from "../../HomePage/HomeHeader";
+import HomeFooter from "../../HomePage/HomeFooter"
 import "./DetailDoctor.scss";
 import { getDetailInfoDoctorService } from '../../../services/UserService';
 import { LANGUAGES } from '../../../utils';
@@ -87,10 +88,12 @@ class DetailDoctor extends Component {
                         }
                     </div>
 
-                    <div className="comment-doctor">
+                    {/* <div className="comment-doctor">
 
-                    </div>
+                    </div> */}
                 </div>
+
+                <HomeFooter />
             </>
         );
     }

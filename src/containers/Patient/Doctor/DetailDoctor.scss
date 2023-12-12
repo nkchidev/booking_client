@@ -1,7 +1,4 @@
 .doctor-detail-container{
-    height: 500px;
-
-
     .info-doctor {
         display: flex;
         margin: 0 100px;
@@ -37,7 +34,7 @@
         margin: 0 100px;
         display: flex;
         padding: 10px 0;
-        height: 200%;
+        min-height: 200px;
 
         .content-left {
             width: 50%;

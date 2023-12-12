@@ -86,6 +86,14 @@ function getAllDetailClinicById(id){
     return axios.get(`/api/get-detail-clinic-by-id?id=${id}`);
 }
 
+function getAllPatientForDoctor(data){
+    return axios.get(`/api/get-list-patient-for-doctor?doctorId=${data.doctorId}&date=${data.date}`);
+}
+
+function postSendRemedy(data) {
+    return axios.post(`/api/send-remedy`, data);
+}
+
 
 export {
     handleLoginApi,
@@ -108,5 +116,7 @@ export {
     getAllDetailSpecialtyById,
     createNewClinic,
     getAllClinic,
-    getAllDetailClinicById
+    getAllDetailClinicById,
+    getAllPatientForDoctor,
+    postSendRemedy
 }

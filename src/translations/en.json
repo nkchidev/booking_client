@@ -27,7 +27,7 @@
             "manage-doctor": "Manage doctors",
             "manage-admin": "Manage admin",
             "crud": "CRUD user",
-            "crud-redux": "CRUD Reudx",
+            "manage-member": "Manage user",
             "clinic": "Clinic",
             "manage-clinic": "Manage clinics",
             "specialty": "Specialties",

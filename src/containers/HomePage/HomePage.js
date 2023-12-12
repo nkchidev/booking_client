@@ -76,7 +76,7 @@ class HomePage extends Component {
                     arrDoctors={arrDoctors} 
                 />
                 {/* <ListSlider settings={settings} title="Cẩm nang"/> */}
-                <About />
+                {/* <About /> */}
                 <Footer />
             </div>
         );

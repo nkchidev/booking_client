@@ -66,7 +66,7 @@ class ManageDoctor extends Component {
                 selectedPrice = listPrice.find(item => item && item.value === priceId);
                 selectedProvince = listProvince.find(item => item && item.value === provinceId);
                 selectedSpecialty = listSpecialty.find(item => item && item.value === specialtyId);
-                selectedClinic = listSpecialty.find(item => item && item.value === clinicId);
+                selectedClinic = listClinic.find(item => item && item.value === clinicId);
             }
             this.setState({
                 contentHTML: markdown.contentHTML,

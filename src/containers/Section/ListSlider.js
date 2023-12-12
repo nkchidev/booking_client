@@ -37,7 +37,7 @@ class ListSlider extends Component {
         let arrDoctors = this.props.arrDoctors;
         let arrSpecialties = this.props.arrSpecialties;
         let arrClinics = this.props.arrClinics;
-        let language = this.props;
+        let { language } = this.props;
         return (
             <div className="section-specialty">
                 <div className="specialty-container">

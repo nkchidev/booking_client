@@ -65,7 +65,7 @@ class ProfileDoctor extends Component {
 
     render() {
         let { dataProfile } = this.state;
-        let { language, isShowDescriptionDoctor, dataTime, isShowPrice, isShowLinkDetail, doctorId } = this.props;
+        let { language, isShowDescription , dataTime, isShowPrice, isShowLinkDetail, doctorId } = this.props;
         let nameVi = '', nameEn = '';
         if (dataProfile && dataProfile.positionData) {
             nameVi = `${dataProfile.positionData.valueVi}, ${dataProfile.firstname}, ${dataProfile.lastname}`;
@@ -85,7 +85,7 @@ class ProfileDoctor extends Component {
                             {language === LANGUAGES.VI ? nameVi : nameEn}
                         </div>
                         <div className="down">
-                            { isShowDescriptionDoctor ? 
+                            { isShowDescription ? 
                                 <>
                                     {   
                                         dataProfile && dataProfile.Markdown && dataProfile.Markdown.description &&

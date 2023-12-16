@@ -71,7 +71,7 @@ class DetailSpecialty extends Component {
 
     handleOnchangeSelect = async (e) => {
         if(this.props.match && this.props.match.params && this.props.match.params.id){
-            let id = this.props.match.params;
+            let { id } = this.props.match.params;
             let location = e.target.value;
 
             let res = await getAllDetailSpecialtyById({

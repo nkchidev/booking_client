@@ -56,10 +56,10 @@
         "edit": "Cập nhật user"
     },
     "homepage": {
-        "outstanding-doctor": "Bác sĩ nổi bật tuần qua",
+        "outstanding-doctor": "Danh sách bác sĩ",
         "more-info": "Xêm thêm",
         "specialty-popular": "Chuyên khoa phổ biến",
-        "outstanding-medical-facility": "Cơ sở y tế nổi bật"
+        "outstanding-medical-facility": "Danh sách cơ sở y tế"
     },
     "manage-schedule": {
         "title": "Quản lý kế hoạch khám bệnh của bác sĩ",

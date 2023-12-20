@@ -28,7 +28,6 @@ class DetailSpecialty extends Component {
                 id: id,
                 location: 'ALL'
             });
-            console.log(res);
 
             let resProvince = await getAllCodeService('PROVINCE');
             if(res && res.errCode === 0 && resProvince && resProvince.errCode === 0){

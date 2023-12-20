@@ -45,9 +45,9 @@ class ListSlider extends Component {
                         <span className="title-section">
                             {this.props.moreInfo && <FormattedMessage id={this.props.title} /> }
                         </span>
-                        <button className="btn-section">
+                        {/* <button className="btn-section">
                             {this.props.moreInfo && <FormattedMessage id={this.props.moreInfo} />}
-                        </button>
+                        </button> */}
                     </div>
                     <div className="specialty-body">
                         <Slider {...this.props.settings}>
